@@ -1,5 +1,6 @@
 ---
 name: Build and test
+run-name: Build and test
 on:
   push:
     branches:
@@ -10,3 +11,11 @@ jobs:
     steps:
       - name: Check out repository code 
         uses: actions/checkout@v3
+      - name: Install NodeJS 18 on build server
+        uses: actions/setup-node@v2
+        with:
+          node-version: 18
+      - name: Install dependencies
+        run: yarn install
+      - name: Lint code
+        run: yarn lint
